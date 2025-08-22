@@ -7,11 +7,15 @@ authors = [{ name = "Agno", email = "hello@agno.com" }]
 
 dependencies = [
   "agno==1.4.6",
+  "aiohttp>=3.12.15",
+  "azure-ai-inference>=1.0.0b9",
+  "baidusearch>=1.0.3",
   "duckduckgo-search",
   "fastapi[standard]",
   "openai",
   "pgvector",
   "psycopg[binary]",
+  "pycountry>=24.6.1",
   "sqlalchemy",
   "yfinance",
 ]

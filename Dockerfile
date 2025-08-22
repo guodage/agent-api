@@ -1,4 +1,4 @@
-FROM agnohq/python:3.12
+FROM python:3.12-slim-bookworm
 
 ARG USER=app
 ARG APP_DIR=/app
@@ -13,8 +13,11 @@ WORKDIR ${APP_DIR}
 # Copy requirements.txt
 COPY requirements.txt ./
 
-# Install requirements
-RUN uv pip sync requirements.txt --system
+# Install requirements in smaller batches with mirrors
+RUN pip install --no-cache-dir --timeout=600 --retries=5 \
+    -i https://pypi.tuna.tsinghua.edu.cn/simple/ \
+    --trusted-host pypi.tuna.tsinghua.edu.cn \
+    -r requirements.txt
 
 # Copy project files
 COPY . .

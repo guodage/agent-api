@@ -1,4 +1,8 @@
 from os import getenv
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
 
 
 def get_db_url() -> str:

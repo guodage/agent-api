@@ -6,11 +6,15 @@ from agno.embedder.openai import OpenAIEmbedder
 from agno.knowledge.url import UrlKnowledge
 from agno.memory.v2.db.postgres import PostgresMemoryDb
 from agno.memory.v2.memory import Memory
-from agno.models.openai import OpenAIChat
 from agno.storage.agent.postgres import PostgresAgentStorage
-from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.baidusearch import BaiduSearchTools
+from agno.tools.hackernews import HackerNewsTools
+from agno.tools.reasoning import ReasoningTools
+from agno.tools.thinking import ThinkingTools
+from agno.tools.website import WebsiteTools
 from agno.vectordb.pgvector import PgVector, SearchType
 
+from agents import config
 from db.session import db_url
 
 
@@ -37,9 +41,14 @@ def get_agno_assist(
         agent_id="agno_assist",
         user_id=user_id,
         session_id=session_id,
-        model=OpenAIChat(id=model_id),
+        model=config.get_ai_model(model_id),
         # Tools available to the agent
-        tools=[DuckDuckGoTools()],
+        tools=[
+            HackerNewsTools(),
+            BaiduSearchTools(),
+            WebsiteTools(),
+            ThinkingTools(),
+            ReasoningTools()],
         # Description of the agent
         description=dedent("""\
             You are AgnoAssist, an advanced AI Agent specializing in Agno: a lightweight framework for building multi-modal, reasoning Agents.
@@ -115,7 +124,7 @@ def get_agno_assist(
         # -*- Memory -*-
         # Enable agentic memory where the Agent can personalize responses to the user
         memory=Memory(
-            model=OpenAIChat(id=model_id),
+            model=config.get_ai_model(model_id),
             db=PostgresMemoryDb(table_name="user_memories", db_url=db_url),
             delete_memories=True,
             clear_memories=True,

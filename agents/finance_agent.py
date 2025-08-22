@@ -4,11 +4,14 @@ from typing import Optional
 from agno.agent import Agent
 from agno.memory.v2.db.postgres import PostgresMemoryDb
 from agno.memory.v2.memory import Memory
-from agno.models.openai import OpenAIChat
 from agno.storage.agent.postgres import PostgresAgentStorage
-from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.baidusearch import BaiduSearchTools
+from agno.tools.reasoning import ReasoningTools
+from agno.tools.thinking import ThinkingTools
+from agno.tools.website import WebsiteTools
 from agno.tools.yfinance import YFinanceTools
 
+from agents import config
 from db.session import db_url
 
 
@@ -23,10 +26,10 @@ def get_finance_agent(
         agent_id="finance_agent",
         user_id=user_id,
         session_id=session_id,
-        model=OpenAIChat(id=model_id),
+        model=config.get_ai_model(model_id),
         # Tools available to the agent
         tools=[
-            DuckDuckGoTools(),
+            BaiduSearchTools(),
             YFinanceTools(
                 stock_price=True,
                 analyst_recommendations=True,
@@ -35,6 +38,9 @@ def get_finance_agent(
                 company_info=True,
                 company_news=True,
             ),
+            WebsiteTools(),
+            ThinkingTools(),
+            ReasoningTools()
         ],
         # Description of the agent
         description=dedent("""\
@@ -113,7 +119,7 @@ def get_finance_agent(
         # -*- Memory -*-
         # Enable agentic memory where the Agent can personalize responses to the user
         memory=Memory(
-            model=OpenAIChat(id=model_id),
+            model=config.get_ai_model(model_id),
             db=PostgresMemoryDb(table_name="user_memories", db_url=db_url),
             delete_memories=True,
             clear_memories=True,
