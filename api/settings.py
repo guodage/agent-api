@@ -24,18 +24,9 @@ class ApiSettings(BaseSettings):
     def set_cors_origin_list(cls, cors_origin_list, info: FieldValidationInfo):
         valid_cors = cors_origin_list or []
 
-        # Add app.agno.com to cors to allow requests from the Agno playground.
-        valid_cors.append("https://app.agno.com")
-        # Add localhost to cors to allow requests from the local environment.
-        valid_cors.append("http://localhost")
-        # Add localhost:3000 to cors to allow requests from local Agent UI.
-        valid_cors.append("http://localhost:3000")
-        # 添加具体的IP和端口
-        valid_cors.append("http://192.168.80.15:8000")
-        valid_cors.append("http://192.168.80.15")
-        # 添加所有端口的支持
-        valid_cors.append("http://192.168.80.15:*")
-
+        # 允许所有来源
+        valid_cors.append("*")
+        
         return valid_cors
 
 
