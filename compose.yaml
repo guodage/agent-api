@@ -1,6 +1,6 @@
 services:
   pgvector:
-    image: agnohq/pgvector:16
+    image: postgres:15
     restart: unless-stopped
     ports:
       - "5432:5432"
@@ -18,12 +18,14 @@ services:
       context: .
       dockerfile: Dockerfile
     image: ${IMAGE_NAME:-agent-api}:${IMAGE_TAG:-latest}
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --ssl-keyfile /app/key.pem --ssl-certfile /app/cert.pem --reload
     restart: unless-stopped
     ports:
       - "8000:8000"
     volumes:
       - .:/app
+      - ./cert.pem:/app/cert.pem:ro
+      - ./key.pem:/app/key.pem:ro
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY}

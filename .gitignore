@@ -30,4 +30,6 @@ dist
 .venv*
 venv*
 
+# maze
 *.iml
+*.pem
