@@ -30,8 +30,12 @@ services:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION}
       AZURE_OPENAI_DEPLOYMENT_NAME: ${AZURE_OPENAI_DEPLOYMENT_NAME}
-      # AGNO_MONITOR: "True"
-      # AGNO_API_KEY: ${AGNO_API_KEY}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      DEEPSEEK_API_ENDPOINT: ${DEEPSEEK_API_ENDPOINT}
+      DEEPSEEK_API_VERSION: ${DEEPSEEK_API_VERSION}
+      DEEPSEEK_DEPLOYMENT_NAME: ${DEEPSEEK_DEPLOYMENT_NAME}
+      AGNO_MONITOR: "True"
+      AGNO_API_KEY: ${AGNO_API_KEY}
       DB_HOST: pgvector
       DB_PORT: 5432
       DB_USER: ${DB_USER:-ai}
@@ -45,6 +49,22 @@ services:
       - pgvector
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  ui:
+    build:
+      context: ../agent-ui
+      dockerfile: Dockerfile
+    image: ${UI_IMAGE_NAME:-agent-ui}:${UI_IMAGE_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    networks:
+      - agent-api
+    depends_on:
+      - api
 
 networks:
   agent-api:
