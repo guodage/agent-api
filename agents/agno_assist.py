@@ -31,7 +31,7 @@ def get_agno_assist_knowledge() -> AgentKnowledge:
 
 
 def get_agno_assist(
-    model_id: str = "gpt-4.1",
+    model_id: str = None,
     user_id: Optional[str] = None,
     session_id: Optional[str] = None,
     debug_mode: bool = True,

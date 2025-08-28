@@ -33,7 +33,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "agno", specifier = "==1.4.6" },
+    { name = "agno", specifier = "==1.8.1" },
     { name = "aiohttp", specifier = ">=3.12.15" },
     { name = "azure-ai-inference", specifier = ">=1.0.0b9" },
     { name = "baidusearch", specifier = ">=1.0.3" },
@@ -52,12 +52,13 @@ provides-extras = ["dev"]
 
 [[package]]
 name = "agno"
-version = "1.4.6"
+version = "1.8.1"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
 dependencies = [
     { name = "docstring-parser" },
     { name = "gitpython" },
     { name = "httpx" },
+    { name = "packaging" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
@@ -68,9 +69,9 @@ dependencies = [
     { name = "typer" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://mirrors.aliyun.com/pypi/packages/02/cd/4e4e0cd9e658135cc0f65943568b55c53094cc5071f42b589581d3078449/agno-1.4.6.tar.gz", hash = "sha256:84ff2fbeeb57ad19d4edf23a6c585f6eb061fda3e59d86e76048a3927ea5855c" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/4a/fc/8e815919fde2104c56091632a39b1b5db4b3ffe01c4b192f57d0252b9a7b/agno-1.8.1.tar.gz", hash = "sha256:ef134860987f7bd3397e028b32ce90e51e0920dc8265e886e76a55651a6384ce" }
 wheels = [
-    { url = "https://mirrors.aliyun.com/pypi/packages/ab/ae/f438b40ec2428974e5451388000ae36170e1f93e0482735b05e332b980ca/agno-1.4.6-py3-none-any.whl", hash = "sha256:0bb8928fad3e125af776ed8450dff7ab4c7df72ef0a16036bc59b74aeeb5d500" },
+    { url = "https://mirrors.aliyun.com/pypi/packages/0d/2c/88321406cf5218475859e6f04d1485771d30b02668537890117d12b1f89f/agno-1.8.1-py3-none-any.whl", hash = "sha256:1c16c2cec2b930a6fd8a15859a57da8f497223f041ce87a11b9a29b1b61f35e5" },
 ]
 
 [[package]]
@@ -1181,6 +1182,15 @@ dependencies = [
 sdist = { url = "https://mirrors.aliyun.com/pypi/packages/00/7c/eaf06b62281f5ca4f774c4cff066e6ddfd6a027e0ac791be16acec3a95e3/openai-1.101.0.tar.gz", hash = "sha256:29f56df2236069686e64aca0e13c24a4ec310545afb25ef7da2ab1a18523f22d" }
 wheels = [
     { url = "https://mirrors.aliyun.com/pypi/packages/c8/a6/0e39baa335bbd1c66c7e0a41dbbec10c5a15ab95c1344e7f7beb28eee65a/openai-1.101.0-py3-none-any.whl", hash = "sha256:6539a446cce154f8d9fb42757acdfd3ed9357ab0d34fcac11096c461da87133b" },
+]
+
+[[package]]
+name = "packaging"
+version = "25.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484" },
 ]
 
 [[package]]

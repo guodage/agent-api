@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [{ name = "Agno", email = "hello@agno.com" }]
 
 dependencies = [
-  "agno==1.4.6",
+  "agno==1.8.1",
   "aiohttp>=3.12.15",
   "azure-ai-inference>=1.0.0b9",
   "baidusearch>=1.0.3",
